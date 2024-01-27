@@ -1,0 +1,84 @@
+body {
+    background-image: url('/static/images/financeBlue.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #333;
+    text-align: center;
+}
+
+.input-field, .submit-btn {
+    padding: 10px;
+    margin: 5px 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.submit-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
+}
+
+.news-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.news-list li {
+    background-color: #fff;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.Positive { color: green; }
+.Negative { color: red; }
+.Neutral { color: rgb(0, 166, 255); }
+
+.sentiment-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.sentiment-table th, .sentiment-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.sentiment-table th {
+    background-color: #007bff;
+    color: white;
+}
+
+.api-url {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #eee;
+    border-radius: 5px;
+    text-align: center;
+}

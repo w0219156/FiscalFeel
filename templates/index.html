@@ -4,50 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Financial News Sentiment</title>
-    <style>
-        .Positive { color: green; }
-        .Negative { color: red; }
-        .Neutral { color: rgb(0, 166, 255); }
-    </style>
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-    <h1>Financial News Sentiment Analysis</h1>
-    <form method="POST">
-        <input type="text" name="ticker" placeholder="Enter Ticker Symbol">
-        <input type="date" name="date" placeholder="Select Date"> <!-- Date Picker -->
-        <button type="submit">Get News</button>
-    </form>
-    <ul>
-        {% for title, sentiment in news_data %}
-            <li>
-                {{ title }} - 
-                <span class="{{ sentiment['label'] }}">Sentiment: {{ sentiment['label'] }}</span>
-            </li>
-        {% endfor %}
-    </ul>
-    <h2>Entity Sentiment Analysis</h2>
-    {% if api_url %}
-    <p>Constructed API URL: {{ api_url }}</p>
-{% endif %}
-<table border="1">
-    <thead>
-        <tr>
-            <th>Entity</th>
-            <th>Positive</th>
-            <th>Neutral</th>
-            <th>Negative</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for entity, counts in entity_sentiments.items() %}
-        <tr>
-            <td>{{ entity }}</td>
-            <td>{{ counts['Positive'] }}</td>
-            <td>{{ counts['Neutral'] }}</td>
-            <td>{{ counts['Negative'] }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+    <div class="container">
+        <h1>Financial News Sentiment Analysis</h1>
+        <form method="POST">
+            <input type="text" name="ticker" placeholder="Enter Ticker Symbol" class="input-field">
+            <input type="date" name="date" placeholder="Select Date" class="input-field">
+            <button type="submit" class="submit-btn">Get News</button>
+        </form>
+        <div class="news-list">
+            <ul id="newsItems">
+                {% for title, sentiment in news_data %}
+                <li>
+                    {{ title }} - <span class="{{ sentiment['label'] }}">Sentiment: {{ sentiment['label'] }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <h2>Entity Sentiment Analysis</h2>
+        <div id="apiUrl" class="api-url">
+            Constructed API URL: {{ api_url }}
+        </div>
+        <table id="sentimentTable" class="sentiment-table">
+            <thead>
+                <tr>
+                    <th>Entity</th>
+                    <th>Positive</th>
+                    <th>Neutral</th>
+                    <th>Negative</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entity, counts in entity_sentiments.items() %}
+                <tr>
+                    <td>{{ entity }}</td>
+                    <td>{{ counts['Positive'] }}</td>
+                    <td>{{ counts['Neutral'] }}</td>
+                    <td>{{ counts['Negative'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
