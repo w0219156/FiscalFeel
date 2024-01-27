@@ -9,19 +9,23 @@
 <body>
     <div class="container">
         <h1>Financial News Sentiment Analysis</h1>
-        <form method="POST">
+        <form method="POST" class="form-inline">
             <input type="text" name="ticker" placeholder="Enter Ticker Symbol" class="input-field">
             <input type="date" name="date" placeholder="Select Date" class="input-field">
             <button type="submit" class="submit-btn">Get News</button>
         </form>
-        <div class="news-list">
-            <ul id="newsItems">
-                {% for title, sentiment in news_data %}
-                <li>
-                    {{ title }} - <span class="{{ sentiment['label'] }}">Sentiment: {{ sentiment['label'] }}</span>
-                </li>
-                {% endfor %}
-            </ul>
+        
+        <div class="news-section">
+            <button class="collapsible">View News Articles</button>
+            <div class="content">
+                <ul>
+                    {% for title, sentiment in news_data %}
+                    <li>
+                        {{ title }} - <span class="{{ sentiment['label'] }}">Sentiment: {{ sentiment['label'] }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
         <h2>Entity Sentiment Analysis</h2>
         <div id="apiUrl" class="api-url">
@@ -48,5 +52,24 @@
             </tbody>
         </table>
     </div>
+    <script>
+        // JavaScript for collapsible functionality
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
 </body>
 </html>
