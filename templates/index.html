@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Financial News Sentiment</title>
     <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
+
 <body>
     <div class="container">
         <h1>Financial News Sentiment Analysis</h1>
         <form method="POST" class="form-inline">
-            <input type="text" name="ticker" placeholder="Enter Ticker Symbol" class="input-field">
-            <input type="date" name="date" placeholder="Select Date" class="input-field">
+            <div class="form-group">
+                <input type="text" name="ticker" placeholder="Enter Ticker Symbol" class="input-field">
+                <input type="date" name="date" placeholder="Select Date" class="input-field">
+            </div>
             <button type="submit" class="submit-btn">Get News</button>
         </form>
-        
+
         <div class="news-section">
-            <button class="collapsible">View News Articles</button>
+            <i class="fas fa-chevron-down collapsible"></i>
             <div class="content">
                 <ul>
                     {% for title, sentiment in news_data %}
@@ -55,10 +60,8 @@
     <script>
         // JavaScript for collapsible functionality
         var coll = document.getElementsByClassName("collapsible");
-        var i;
-
-        for (i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click", function() {
+        for (var i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
                 this.classList.toggle("active");
                 var content = this.nextElementSibling;
                 if (content.style.display === "block") {
@@ -70,6 +73,8 @@
         }
     </script>
 </body>
+
 </html>
 </body>
+
 </html>
