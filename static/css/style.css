@@ -1,12 +1,14 @@
 body {
-    background-image: url('/static/images/financeBlue.jpg');
+    /* background-image: url('/static/images/financeBlue.jpg');
+    background-image: url('/static/images/aihead.png'); */
+    background-image: url('/static/images/laser.avif');
     background-repeat: no-repeat;
     background-size: cover;
-}
+} 
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
+    background-color: black;
     margin: 0;
     padding: 0;
 }
@@ -20,6 +22,9 @@ body {
 h1, h2 {
     color: #333;
     text-align: center;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700; 
 }
 
 .input-field, .submit-btn {
@@ -62,6 +67,7 @@ h1, h2 {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    background-color: black;
 }
 
 .sentiment-table th, .sentiment-table td {
@@ -81,4 +87,56 @@ h1, h2 {
     background-color: #eee;
     border-radius: 5px;
     text-align: center;
+}
+
+.form-inline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    display: flex;
+    flex-grow: 1; 
+    margin-right: 10px; 
+}
+
+.input-field {
+    margin: 5px;
+    flex-grow: 1; 
+}
+
+.input-field {
+    margin: 5px;
+    flex-grow: 1;
+}
+
+.active, .collapsible:hover {
+    background-color: #0056b3;
+}
+
+.content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #f9f9f9;
+}
+
+.sentiment-table th, .sentiment-table td {
+    color: white;
+}
+
+.collapsible {
+    cursor: pointer;
+    font-size: 24px; 
+    color: #007bff; 
+    margin-top: 20px;
+    text-align: center;
+}
+
+.collapsible + span {
+    margin-left: 10px;
+    vertical-align: middle;
+    color: white;
 }

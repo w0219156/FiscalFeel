@@ -3,50 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial News Sentiment</title>
+    <title>FiscalFeel</title>
     <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1>Financial News Sentiment Analysis</h1>
-        <form method="POST">
-            <input type="text" name="ticker" placeholder="Enter Ticker Symbol" class="input-field">
-            <input type="date" name="date" placeholder="Select Date" class="input-field">
-            <button type="submit" class="submit-btn">Get News</button>
+        <h1>FiscalFeel AI</h1>
+        <form method="POST" class="form-inline">
+            <div class="form-group">
+                <input type="text" name="ticker" placeholder="Enter Ticker Symbol" class="input-field">
+                <input type="date" name="date" placeholder="Select Date" class="input-field">
+            </div>
+            <button type="submit" class="submit-btn">Analyze News</button>
         </form>
-        <div class="news-list">
-            <ul id="newsItems">
-                {% for title, sentiment in news_data %}
-                <li>
-                    {{ title }} - <span class="{{ sentiment['label'] }}">Sentiment: {{ sentiment['label'] }}</span>
-                </li>
-                {% endfor %}
-            </ul>
+
+        <div class="news-section">
+            <i class="fas fa-chevron-down collapsible"></i> <span>Articles</span>
+            <div class="content">
+                <ul>
+                    {% for title, sentiment in news_data %}
+                    <li>
+                        {{ title }} - <span class="{{ sentiment['label'] }}">Sentiment: {{ sentiment['label'] }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
-        <h2>Entity Sentiment Analysis</h2>
-        <div id="apiUrl" class="api-url">
-            Constructed API URL: {{ api_url }}
+
+        <div class="entity-section">
+            <i class="fas fa-chevron-down collapsible"></i> <span>Identified Entities</span>
+            <div class="content">
+                <table id="sentimentTable" class="sentiment-table">
+                    <thead>
+                        <tr>
+                            <th>Entity</th>
+                            <th>Positive</th>
+                            <th>Neutral</th>
+                            <th>Negative</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for entity, counts in entity_sentiments.items() %}
+                        <tr>
+                            <td>{{ entity }}</td>
+                            <td>{{ counts['Positive'] }}</td>
+                            <td>{{ counts['Neutral'] }}</td>
+                            <td>{{ counts['Negative'] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <table id="sentimentTable" class="sentiment-table">
-            <thead>
-                <tr>
-                    <th>Entity</th>
-                    <th>Positive</th>
-                    <th>Neutral</th>
-                    <th>Negative</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for entity, counts in entity_sentiments.items() %}
-                <tr>
-                    <td>{{ entity }}</td>
-                    <td>{{ counts['Positive'] }}</td>
-                    <td>{{ counts['Neutral'] }}</td>
-                    <td>{{ counts['Negative'] }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
     </div>
+
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        for (var i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling.nextElementSibling; 
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+    </script>
 </body>
 </html>
