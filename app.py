@@ -12,7 +12,7 @@ ner_model = AutoModelForTokenClassification.from_pretrained("dslim/bert-base-NER
 ner_pipeline = pipeline("ner", model=ner_model, tokenizer=ner_tokenizer)
 
 
-load_dotenv()  # This loads the variables from .env
+load_dotenv()  
 api_key = os.getenv('API_KEY')
 
 app = Flask(__name__)
@@ -29,6 +29,8 @@ def construct_api_url(tickers, date, api_key):
     url = f"https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers={tickers}&time_from={formatted_date}T0000&time_to={formatted_date}T2359&apikey={api_key}"
     return url
 
+
+#Instrcutions provided from www.alphavantage.co API instructions
 def fetch_financial_news(url):
     response = requests.get(url)
     if response.status_code != 200:
@@ -53,7 +55,7 @@ def index():
             'selected_ticker': ticker,
             'news_data': zip(news_titles, sentiments),
             'selected_date': date,
-            'api_url': api_url  # Add the constructed API URL
+            'api_url': api_url  
         }
     else:
         context = {'news_data': [], 'api_url': api_url}
@@ -71,6 +73,9 @@ def update_entity_sentiment(entity_sentiment_count, entity, title):
     entity_sentiment_count[entity][sentiment_result] += 1
     entity_sentiment_count[entity]['Total'] += 1
 
+
+# Use the NER pipeline to indentify people and orgs
+# parsing code adapted from https://huggingface.co/dslim/bert-base-NER
 def analyze_titles_for_ner_and_sentiment(titles):
     entity_sentiment_count = {}
     for title in titles:
@@ -90,6 +95,7 @@ def analyze_titles_for_ner_and_sentiment(titles):
         if full_entity and (entity_type == 'ORG' or entity_type == 'PER'):
             update_entity_sentiment(entity_sentiment_count, full_entity, title)
 
+    # Only track entites above 3 to avoid clutter and maintainly meanfulness
     filtered_entities = {k: v for k, v in entity_sentiment_count.items() if v['Total'] >= 3}
     return filtered_entities
 
